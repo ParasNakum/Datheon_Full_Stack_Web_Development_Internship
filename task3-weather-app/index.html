@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Live Weather Telemetry | Datheon Task 3</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body class="weather-theme-default">
+    <div class="app-overlay"></div>
+
+    <div class="weather-container">
+        <!-- Header -->
+        <header class="app-header">
+            <div class="header-left">
+                <div class="app-logo">
+                    <i class="fas fa-satellite-dish"></i>
+                </div>
+                <div>
+                    <h1>Live Weather Telemetry</h1>
+                    <span class="subtext">Datheon Full Stack Task 3 • Paras Nakum</span>
+                </div>
+            </div>
+            <div class="header-right">
+                <a href="../index.html" class="nav-btn"><i class="fas fa-arrow-left"></i> Projects Hub</a>
+            </div>
+        </header>
+
+        <!-- Search Bar and Quick Select -->
+        <section class="search-section">
+            <form id="weatherSearchForm" class="search-form">
+                <div class="search-input-wrapper">
+                    <i class="fas fa-search search-icon"></i>
+                    <input type="text" id="cityInput" placeholder="Search any global city (e.g., Surat, Mumbai, London, Tokyo, New York)..." autocomplete="off" required>
+                    <button type="submit" class="search-btn">
+                        <span>Search</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </div>
+            </form>
+
+            <div class="quick-cities">
+                <span class="quick-label">Quick Cities:</span>
+                <button class="quick-city-btn" data-city="Surat">Surat</button>
+                <button class="quick-city-btn" data-city="Ahmedabad">Ahmedabad</button>
+                <button class="quick-city-btn" data-city="Mumbai">Mumbai</button>
+                <button class="quick-city-btn" data-city="London">London</button>
+                <button class="quick-city-btn" data-city="Tokyo">Tokyo</button>
+                <button class="quick-city-btn" data-city="New York">New York</button>
+            </div>
+        </section>
+
+        <!-- Error & Notification Alert -->
+        <div class="error-banner" id="errorBanner" style="display: none;">
+            <i class="fas fa-triangle-exclamation"></i>
+            <span id="errorMessage">Unable to locate city. Please verify city name and retry.</span>
+        </div>
+
+        <!-- Loading State -->
+        <div class="loading-state" id="loadingState" style="display: none;">
+            <div class="spinner"></div>
+            <p>Fetching real-time satellite telemetry & weather metrics...</p>
+        </div>
+
+        <!-- Weather Display Content -->
+        <main class="weather-display" id="weatherDisplay">
+            <!-- Current Weather Hero Card -->
+            <section class="current-weather-card">
+                <div class="cw-main">
+                    <div class="cw-info">
+                        <div class="location-badge">
+                            <i class="fas fa-location-dot"></i>
+                            <span id="cityName">Surat</span>, <span id="countryCode">IN</span>
+                        </div>
+                        <div class="timestamp" id="currentDate">Monday, Oct 19, 2026</div>
+                        <div class="temp-wrapper">
+                            <span class="temp-value" id="currentTemp">31</span>
+                            <span class="temp-unit">°C</span>
+                        </div>
+                        <div class="weather-condition" id="weatherCondition">Sunny / Clear Sky</div>
+                        <div class="feels-like">Feels like <strong id="feelsLike">34°C</strong></div>
+                    </div>
+
+                    <div class="cw-visual">
+                        <div class="weather-icon-large" id="weatherIconLarge">
+                            <i class="fas fa-sun"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Telemetry Metrics Strip -->
+                <div class="telemetry-strip">
+                    <div class="telemetry-item">
+                        <div class="t-icon humidity-icon"><i class="fas fa-droplet"></i></div>
+                        <div class="t-data">
+                            <span class="t-value" id="humidity">65%</span>
+                            <span class="t-label">Humidity</span>
+                        </div>
+                    </div>
+
+                    <div class="telemetry-item">
+                        <div class="t-icon wind-icon"><i class="fas fa-wind"></i></div>
+                        <div class="t-data">
+                            <span class="t-value" id="windSpeed">14 km/h</span>
+                            <span class="t-label">Wind Speed</span>
+                        </div>
+                    </div>
+
+                    <div class="telemetry-item">
+                        <div class="t-icon pressure-icon"><i class="fas fa-gauge-high"></i></div>
+                        <div class="t-data">
+                            <span class="t-value" id="pressure">1012 hPa</span>
+                            <span class="t-label">Atm. Pressure</span>
+                        </div>
+                    </div>
+
+                    <div class="telemetry-item">
+                        <div class="t-icon uv-icon"><i class="fas fa-eye"></i></div>
+                        <div class="t-data">
+                            <span class="t-value" id="visibility">10 km</span>
+                            <span class="t-label">Visibility</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- 5-Day Forecast Section -->
+            <section class="forecast-section">
+                <div class="forecast-header">
+                    <h2><i class="fas fa-calendar-days"></i> 5-Day Temperature Forecast</h2>
+                    <span class="forecast-note">Daily highs, lows & weather projections</span>
+                </div>
+                <div class="forecast-grid" id="forecastGrid">
+                    <!-- Forecast Cards dynamically rendered by script.js -->
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

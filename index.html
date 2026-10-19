@@ -1,0 +1,588 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Datheon Full Stack Web Development Internship | Paras Nakum</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <style>
+        :root {
+            --bg-body: #0b0f19;
+            --bg-card: #111827;
+            --bg-card-hover: #1f2937;
+            --border-color: #1f2937;
+            --text-main: #f9fafb;
+            --text-sub: #9ca3af;
+            --primary: #3b82f6;
+            --primary-accent: #60a5fa;
+            --success: #10b981;
+            --purple: #8b5cf6;
+            --orange: #f97316;
+            --pink: #ec4899;
+            --radius: 14px;
+            --shadow: 0 10px 25px -5px rgba(0, 0, 0, 0.4);
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Plus Jakarta Sans', sans-serif;
+            background-color: var(--bg-body);
+            color: var(--text-main);
+            line-height: 1.6;
+            padding-bottom: 70px;
+        }
+
+        .container {
+            max-width: 1100px;
+            margin: 0 auto;
+            padding: 0 24px;
+        }
+
+        /* Top Verification Strip */
+        .verification-strip {
+            background: linear-gradient(90deg, #1e3a8a 0%, #1e1b4b 100%);
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+            padding: 12px 0;
+            font-size: 0.85rem;
+        }
+
+        .strip-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 12px;
+        }
+
+        .badge-verified {
+            background: rgba(16, 185, 129, 0.2);
+            color: #34d399;
+            border: 1px solid rgba(16, 185, 129, 0.4);
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .credential-link {
+            color: #93c5fd;
+            text-decoration: none;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-weight: 600;
+        }
+
+        .credential-link:hover {
+            color: #bfdbfe;
+            text-decoration: underline;
+        }
+
+        /* Hero */
+        .hero {
+            padding: 60px 0 40px;
+            text-align: center;
+        }
+
+        .org-badge {
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            background: rgba(59, 130, 246, 0.15);
+            border: 1px solid rgba(59, 130, 246, 0.3);
+            color: var(--primary-accent);
+            padding: 6px 16px;
+            border-radius: 30px;
+            font-size: 0.85rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .hero h1 {
+            font-family: 'Space Grotesk', sans-serif;
+            font-size: 2.8rem;
+            font-weight: 800;
+            letter-spacing: -0.5px;
+            margin-bottom: 14px;
+            background: linear-gradient(135deg, #ffffff 30%, #93c5fd 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+
+        .hero-desc {
+            max-width: 760px;
+            margin: 0 auto 30px;
+            color: var(--text-sub);
+            font-size: 1.1rem;
+        }
+
+        /* Student Meta Card */
+        .student-meta-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 24px;
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 20px;
+            box-shadow: var(--shadow);
+            margin-bottom: 50px;
+        }
+
+        .meta-item {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .meta-label {
+            font-size: 0.78rem;
+            color: var(--text-sub);
+            text-transform: uppercase;
+            letter-spacing: 0.8px;
+            font-weight: 600;
+        }
+
+        .meta-value {
+            font-size: 0.98rem;
+            font-weight: 700;
+            color: var(--text-main);
+        }
+
+        /* Section Heading */
+        .section-header {
+            margin-bottom: 28px;
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-end;
+        }
+
+        .section-header h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .submission-status {
+            color: #34d399;
+            font-size: 0.88rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        /* Tasks Grid */
+        .tasks-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 24px;
+            margin-bottom: 50px;
+        }
+
+        .task-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            overflow: hidden;
+            display: flex;
+            flex-direction: column;
+            transition: all 0.3s ease;
+            box-shadow: var(--shadow);
+        }
+
+        .task-card:hover {
+            transform: translateY(-5px);
+            border-color: #374151;
+            box-shadow: 0 15px 30px -10px rgba(0, 0, 0, 0.6);
+        }
+
+        .task-banner {
+            padding: 20px 24px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .banner-1 { background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%); }
+        .banner-2 { background: linear-gradient(135deg, #4c1d95 0%, #7c3aed 100%); }
+        .banner-3 { background: linear-gradient(135deg, #065f46 0%, #059669 100%); }
+        .banner-4 { background: linear-gradient(135deg, #831843 0%, #db2777 100%); }
+
+        .task-tag {
+            background: rgba(0, 0, 0, 0.4);
+            color: #fff;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+        }
+
+        .task-status-done {
+            background: rgba(16, 185, 129, 0.25);
+            color: #ecfdf5;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 0.78rem;
+            font-weight: 700;
+            display: inline-flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .task-body {
+            padding: 24px;
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+
+        .task-title {
+            font-size: 1.25rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .task-desc {
+            color: var(--text-sub);
+            font-size: 0.92rem;
+            margin-bottom: 18px;
+            flex: 1;
+            line-height: 1.55;
+        }
+
+        .tech-chips {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+            margin-bottom: 22px;
+        }
+
+        .chip {
+            background: #1e293b;
+            color: #cbd5e1;
+            padding: 4px 10px;
+            border-radius: 6px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .task-actions {
+            display: flex;
+            gap: 12px;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 8px;
+            padding: 10px 18px;
+            border-radius: 8px;
+            font-weight: 600;
+            font-size: 0.88rem;
+            text-decoration: none;
+            transition: all 0.2s;
+            cursor: pointer;
+        }
+
+        .btn-launch {
+            background: var(--primary);
+            color: #fff;
+            flex: 1;
+        }
+
+        .btn-launch:hover {
+            background: #2563eb;
+        }
+
+        .btn-view-code {
+            background: #1e293b;
+            color: #cbd5e1;
+            border: 1px solid var(--border-color);
+        }
+
+        .btn-view-code:hover {
+            background: #334155;
+            color: #fff;
+        }
+
+        /* Submission Checklist */
+        .checklist-card {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: var(--radius);
+            padding: 30px;
+            margin-bottom: 50px;
+        }
+
+        .checklist-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 16px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .checklist-items {
+            list-style: none;
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 14px;
+        }
+
+        .checklist-item {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            font-size: 0.92rem;
+            color: #e5e7eb;
+        }
+
+        .check-icon {
+            color: #10b981;
+            font-size: 1.1rem;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding-top: 30px;
+            border-top: 1px solid var(--border-color);
+            color: var(--text-sub);
+            font-size: 0.85rem;
+        }
+
+        @media (max-width: 850px) {
+            .student-meta-card {
+                grid-template-columns: repeat(2, 1fr);
+            }
+            .tasks-grid {
+                grid-template-columns: 1fr;
+            }
+            .checklist-items {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Top Verification Strip -->
+    <div class="verification-strip">
+        <div class="container strip-content">
+            <div>
+                <span class="badge-verified"><i class="fas fa-certificate"></i> Datheon Confirmed Profile</span>
+                <span style="margin-left: 10px; color: #cbd5e1;">Batch 01 · Active Student</span>
+            </div>
+            <div>
+                <a href="https://www.datheon.in/verify?id=DT-2026-YQFWW" target="_blank" class="credential-link">
+                    Application ID: <strong>DT-2026-YQFWW</strong> <i class="fas fa-external-link-alt"></i>
+                </a>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Content -->
+    <div class="container">
+        <!-- Hero Header -->
+        <header class="hero">
+            <div class="org-badge">
+                <i class="fas fa-code"></i> Datheon Full Stack Web Development Internship
+            </div>
+            <h1>Project Engineering Submission</h1>
+            <p class="hero-desc">
+                High-performance portfolio proof and modular web applications built for Directorate Certification. All 4 curriculum project tasks engineered and deployed with zero server dependencies.
+            </p>
+        </header>
+
+        <!-- Student Metadata Card -->
+        <section class="student-meta-card">
+            <div class="meta-item">
+                <span class="meta-label">Intern Candidate</span>
+                <span class="meta-value">Paras Nakum</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Institution</span>
+                <span class="meta-value">R.B. Institute of Management</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Application ID</span>
+                <span class="meta-value">DT-2026-YQFWW</span>
+            </div>
+            <div class="meta-item">
+                <span class="meta-label">Official Email</span>
+                <span class="meta-value">parasnakum0261@gmail.com</span>
+            </div>
+        </section>
+
+        <!-- Tasks Showcase Grid -->
+        <section>
+            <div class="section-header">
+                <h2>Project Milestones (All 4 Completed)</h2>
+                <span class="submission-status"><i class="fas fa-circle-check"></i> 100% Deliverables Ready</span>
+            </div>
+
+            <div class="tasks-grid">
+                <!-- Task 1 Card -->
+                <div class="task-card">
+                    <div class="task-banner banner-1">
+                        <span class="task-tag">TASK 01</span>
+                        <span class="task-status-done"><i class="fas fa-check"></i> Completed</span>
+                    </div>
+                    <div class="task-body">
+                        <h3 class="task-title">Developer Portfolio</h3>
+                        <p class="task-desc">
+                            Sleek developer portfolio showcasing projects, resume credentials, tech stack skills, dark/light theme switch, interactive project modal popups, and responsive navigation.
+                        </p>
+                        <div class="tech-chips">
+                            <span class="chip">HTML5 Semantic</span>
+                            <span class="chip">CSS3 Grid/Flex</span>
+                            <span class="chip">Dark/Light Mode</span>
+                            <span class="chip">Modal Popups</span>
+                        </div>
+                        <div class="task-actions">
+                            <a href="task1-portfolio/index.html" class="btn btn-launch">
+                                <i class="fas fa-desktop"></i> Launch Task 1
+                            </a>
+                            <a href="task1-portfolio/" class="btn btn-view-code" title="View Source Directory">
+                                <i class="fas fa-folder"></i> Files
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 2 Card -->
+                <div class="task-card">
+                    <div class="task-banner banner-2">
+                        <span class="task-tag">TASK 02</span>
+                        <span class="task-status-done"><i class="fas fa-check"></i> Completed</span>
+                    </div>
+                    <div class="task-body">
+                        <h3 class="task-title">TaskMaster Productivity (CRUD)</h3>
+                        <p class="task-desc">
+                            Productivity web application supporting complete task CRUD operations, category filters (Work, Study, Personal, Coding), due dates, status filters, and localStorage persistence.
+                        </p>
+                        <div class="tech-chips">
+                            <span class="chip">JavaScript ES6+</span>
+                            <span class="chip">CRUD Engine</span>
+                            <span class="chip">localStorage API</span>
+                            <span class="chip">Search & Filters</span>
+                        </div>
+                        <div class="task-actions">
+                            <a href="task2-task-manager/index.html" class="btn btn-launch">
+                                <i class="fas fa-list-check"></i> Launch Task 2
+                            </a>
+                            <a href="task2-task-manager/" class="btn btn-view-code" title="View Source Directory">
+                                <i class="fas fa-folder"></i> Files
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 3 Card -->
+                <div class="task-card">
+                    <div class="task-banner banner-3">
+                        <span class="task-tag">TASK 03</span>
+                        <span class="task-status-done"><i class="fas fa-check"></i> Completed</span>
+                    </div>
+                    <div class="task-body">
+                        <h3 class="task-title">Live Weather Telemetry</h3>
+                        <p class="task-desc">
+                            Global weather dashboard retrieving real-time metrics (temperature, conditions, dynamic weather icons, humidity, wind, atmospheric pressure) with 5-day daily forecast and dynamic background themes.
+                        </p>
+                        <div class="tech-chips">
+                            <span class="chip">Async / Await</span>
+                            <span class="chip">Fetch API</span>
+                            <span class="chip">5-Day Forecast</span>
+                            <span class="chip">Dynamic Themes</span>
+                        </div>
+                        <div class="task-actions">
+                            <a href="task3-weather-app/index.html" class="btn btn-launch">
+                                <i class="fas fa-cloud-sun"></i> Launch Task 3
+                            </a>
+                            <a href="task3-weather-app/" class="btn btn-view-code" title="View Source Directory">
+                                <i class="fas fa-folder"></i> Files
+                            </a>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Task 4 Card -->
+                <div class="task-card">
+                    <div class="task-banner banner-4">
+                        <span class="task-tag">TASK 04</span>
+                        <span class="task-status-done"><i class="fas fa-check"></i> Completed</span>
+                    </div>
+                    <div class="task-body">
+                        <h3 class="task-title">NexStore E-Commerce Storefront</h3>
+                        <p class="task-desc">
+                            Modern e-commerce storefront fetching catalog data from FakeStoreAPI, dynamic ratings, category filtering, persistent slide-out shopping cart drawer, tax/shipping computation, and simulated checkout.
+                        </p>
+                        <div class="tech-chips">
+                            <span class="chip">FakeStoreAPI</span>
+                            <span class="chip">Sliding Cart Drawer</span>
+                            <span class="chip">Tax & Totals</span>
+                            <span class="chip">Simulated Checkout</span>
+                        </div>
+                        <div class="task-actions">
+                            <a href="task4-ecommerce-store/index.html" class="btn btn-launch">
+                                <i class="fas fa-cart-shopping"></i> Launch Task 4
+                            </a>
+                            <a href="task4-ecommerce-store/" class="btn btn-view-code" title="View Source Directory">
+                                <i class="fas fa-folder"></i> Files
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Directorate Verification Checklist -->
+        <section class="checklist-card">
+            <h3><i class="fas fa-clipboard-check" style="color: #10b981;"></i> Datheon Submission Checklist & Portal Form Alignment</h3>
+            <ul class="checklist-items">
+                <li class="checklist-item">
+                    <i class="fas fa-circle-check check-icon"></i>
+                    <span><strong>Task 1 Completed:</strong> Developer Portfolio with Dark/Light Toggle</span>
+                </li>
+                <li class="checklist-item">
+                    <i class="fas fa-circle-check check-icon"></i>
+                    <span><strong>Task 2 Completed:</strong> Task CRUD Productivity with LocalStorage</span>
+                </li>
+                <li class="checklist-item">
+                    <i class="fas fa-circle-check check-icon"></i>
+                    <span><strong>Task 3 Completed:</strong> Live Weather Telemetry & 5-Day Forecast</span>
+                </li>
+                <li class="checklist-item">
+                    <i class="fas fa-circle-check check-icon"></i>
+                    <span><strong>Task 4 Completed:</strong> E-Commerce Store with FakeStoreAPI & Cart Drawer</span>
+                </li>
+                <li class="checklist-item">
+                    <i class="fas fa-circle-check check-icon"></i>
+                    <span><strong>Repository Name:</strong> Datheon_Full_Stack_Web_Development_Internship</span>
+                </li>
+                <li class="checklist-item">
+                    <i class="fas fa-circle-check check-icon"></i>
+                    <span><strong>Application Credential:</strong> Confirmed DT-2026-YQFWW (Batch 01)</span>
+                </li>
+            </ul>
+        </section>
+
+        <!-- Footer -->
+        <footer class="footer">
+            <p>&copy; 2026 Paras Nakum (parasnakum0261@gmail.com). Submitted for Datheon Full Stack Web Development Directorate Certification.</p>
+        </footer>
+    </div>
+</body>
+</html>

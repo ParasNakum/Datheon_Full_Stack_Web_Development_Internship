@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NexStore | Modern E-Commerce Storefront</title>
+    <!-- Google Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&family=Space+Grotesk:wght@600;700&display=swap" rel="stylesheet">
+    <!-- Font Awesome -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <!-- Top Promotional Banner -->
+    <div class="promo-banner">
+        <span>✨ Datheon Internship Special: Free Express Shipping on Orders Over $50 • Built by Paras Nakum</span>
+    </div>
+
+    <!-- Navigation Header -->
+    <header class="store-header">
+        <div class="header-container">
+            <div class="header-brand">
+                <a href="index.html" class="logo">
+                    <span class="logo-icon"><i class="fas fa-bag-shopping"></i></span>
+                    <span class="logo-text">NexStore</span>
+                </a>
+            </div>
+
+            <!-- Search Bar -->
+            <div class="header-search">
+                <i class="fas fa-search search-icon"></i>
+                <input type="text" id="storeSearchInput" placeholder="Search across catalog (e.g. jacket, gold, ssd, backpack)...">
+            </div>
+
+            <!-- Header Actions -->
+            <div class="header-actions">
+                <a href="../index.html" class="hub-link" title="Projects Hub"><i class="fas fa-arrow-left"></i> Hub</a>
+                <button class="cart-btn" id="openCartBtn" aria-label="Open Shopping Cart">
+                    <i class="fas fa-cart-shopping"></i>
+                    <span class="cart-badge" id="cartBadgeCount">0</span>
+                </button>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero / Category Filter Bar -->
+    <section class="store-filter-bar">
+        <div class="container filter-container">
+            <div class="categories-tabs" id="categoryTabs">
+                <button class="cat-pill active" data-category="all">All Products</button>
+                <button class="cat-pill" data-category="men's clothing">Men's Clothing</button>
+                <button class="cat-pill" data-category="women's clothing">Women's Clothing</button>
+                <button class="cat-pill" data-category="jewelery">Jewelery</button>
+                <button class="cat-pill" data-category="electronics">Electronics</button>
+            </div>
+
+            <div class="sort-selector">
+                <label for="sortSelect">Sort By:</label>
+                <select id="sortSelect">
+                    <option value="featured">Featured</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="rating">Highest Rated</option>
+                </select>
+            </div>
+        </div>
+    </section>
+
+    <!-- Main Products View -->
+    <main class="store-main container">
+        <!-- Status & Filter Summary -->
+        <div class="catalog-summary">
+            <h2 id="catalogTitle">All Products</h2>
+            <span class="catalog-count" id="catalogCount">Showing products...</span>
+        </div>
+
+        <!-- Loading Skeleton / Spinner -->
+        <div class="store-loading" id="storeLoading">
+            <div class="spinner"></div>
+            <p>Fetching real-time catalog from FakeStoreAPI...</p>
+        </div>
+
+        <!-- Products Grid -->
+        <div class="products-grid" id="productsGrid">
+            <!-- Dynamic product cards injected via JavaScript -->
+        </div>
+
+        <!-- No Results Found -->
+        <div class="empty-products" id="emptyProducts" style="display: none;">
+            <i class="fas fa-box-open"></i>
+            <h3>No products found</h3>
+            <p>Try clearing your search query or choosing another category.</p>
+        </div>
+    </main>
+
+    <!-- Slide-Out Shopping Cart Drawer -->
+    <div class="cart-drawer-overlay" id="cartOverlay"></div>
+    <aside class="cart-drawer" id="cartDrawer">
+        <div class="drawer-header">
+            <h3><i class="fas fa-shopping-bag"></i> Your Shopping Bag (<span id="cartDrawerCount">0</span>)</h3>
+            <button class="drawer-close" id="closeCartBtn">&times;</button>
+        </div>
+
+        <div class="drawer-body" id="cartDrawerBody">
+            <!-- Dynamic Cart Items injected here -->
+            <div class="empty-cart-state" id="emptyCartState">
+                <i class="fas fa-cart-arrow-down"></i>
+                <h4>Your cart is empty</h4>
+                <p>Add some awesome items from our catalog to get started!</p>
+            </div>
+            <ul class="cart-items-list" id="cartItemsList"></ul>
+        </div>
+
+        <div class="drawer-footer" id="cartDrawerFooter">
+            <div class="cost-summary">
+                <div class="cost-row">
+                    <span>Subtotal:</span>
+                    <strong id="cartSubtotal">$0.00</strong>
+                </div>
+                <div class="cost-row">
+                    <span>Estimated Tax (8%):</span>
+                    <strong id="cartTax">$0.00</strong>
+                </div>
+                <div class="cost-row">
+                    <span>Shipping:</span>
+                    <strong id="cartShipping">FREE</strong>
+                </div>
+                <div class="cost-row total-row">
+                    <span>Order Total:</span>
+                    <strong id="cartGrandTotal">$0.00</strong>
+                </div>
+            </div>
+
+            <button class="btn btn-checkout btn-block" id="checkoutBtn">
+                Proceed to Checkout <i class="fas fa-arrow-right"></i>
+            </button>
+        </div>
+    </aside>
+
+    <!-- Simulated Checkout Modal -->
+    <div class="modal" id="checkoutModal">
+        <div class="modal-backdrop"></div>
+        <div class="modal-card">
+            <div class="modal-header">
+                <h3><i class="fas fa-lock"></i> Simulated Secure Checkout</h3>
+                <button class="modal-close" id="closeCheckoutModal">&times;</button>
+            </div>
+            <div class="modal-body" id="checkoutModalBody">
+                <form id="checkoutForm">
+                    <h4 class="form-section-title">Shipping & Contact Details</h4>
+                    <div class="form-row">
+                        <div class="form-group flex-1">
+                            <label for="custName">Full Name</label>
+                            <input type="text" id="custName" value="Paras Nakum" required>
+                        </div>
+                        <div class="form-group flex-1">
+                            <label for="custEmail">Email Address</label>
+                            <input type="email" id="custEmail" value="parasnakum0261@gmail.com" required>
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="custAddress">Shipping Address</label>
+                        <input type="text" id="custAddress" value="101 Tech Avenue, Adajan, Surat, Gujarat" required>
+                    </div>
+
+                    <h4 class="form-section-title">Payment Method (Simulated Test)</h4>
+                    <div class="payment-method-box">
+                        <div class="pay-radio">
+                            <input type="radio" id="payCard" name="payment" checked>
+                            <label for="payCard"><i class="fas fa-credit-card"></i> Instant Mock Card (4242 •••• 4242)</label>
+                        </div>
+                    </div>
+
+                    <div class="order-summary-box">
+                        <div class="os-row">
+                            <span>Total Payable:</span>
+                            <span class="os-total" id="checkoutOrderTotal">$0.00</span>
+                        </div>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary btn-block checkout-submit-btn">
+                        <i class="fas fa-circle-check"></i> Place Order Now
+                    </button>
+                </form>
+            </div>
+
+            <!-- Confirmation Success View -->
+            <div class="order-confirmed-view" id="orderConfirmedView" style="display: none;">
+                <div class="success-icon"><i class="fas fa-circle-check"></i></div>
+                <h3>Order Placed Successfully!</h3>
+                <p>Order Reference: <strong id="orderRefNumber">ORD-89472-X</strong></p>
+                <p class="conf-sub">A simulated invoice receipt has been dispatched to <strong>parasnakum0261@gmail.com</strong>.</p>
+                <div class="order-actions">
+                    <button class="btn btn-primary" id="continueShoppingBtn">Continue Shopping</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Toast Notification -->
+    <div class="toast" id="storeToast">
+        <i class="fas fa-bag-shopping"></i>
+        <span id="storeToastMsg">Item added to your bag!</span>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
