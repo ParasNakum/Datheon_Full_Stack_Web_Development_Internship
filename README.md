@@ -109,7 +109,7 @@ A full-featured modern e-commerce storefront consuming real-time product catalog
 
 1. **Clone this repository:**
    ```bash
-   git clone https://github.com/parasnakum0261/Datheon_Full_Stack_Web_Development_Internship.git
+   git clone https://github.com/ParasNakum/Datheon_Full_Stack_Web_Development_Internship.git
    ```
 2. **Navigate into the folder:**
    ```bash
